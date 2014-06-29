@@ -5,6 +5,7 @@ php:
 
 env:
   global:
+    - APP_NAME=obscure-citadel-8851 
     - CLEARDB_DATABASE_URL=mysql://shippable@127.0.0.1:3306/test?reconnect=true
 
 before_script: 
@@ -16,4 +17,4 @@ script:
   - phpunit  --log-junit shippable/testresults/junit.xml --coverage-xml shippable/codecoverage test.php
 
 after_success:
-  - git push -f git@heroku.com:obscure-citadel-8851.git $BRANCH:master
+  - git push -f git@heroku.com:$APP_NAME.git $BRANCH:master
