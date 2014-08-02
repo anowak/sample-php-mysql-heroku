@@ -18,9 +18,9 @@ before_script:
   - mysql -e 'create database if not exists test;'
 
 script:
-  - phpunit  --log-junit shippable/testresults/junit.xml --coverage-xml shippable/codecoverage test.php
+  - phpunit --log-junit shippable/testresults/junit.xml --coverage-xml shippable/codecoverage test.php
 
 after_success:
   - test -f ~/.ssh/id_rsa.heroku || ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.heroku && heroku keys:add ~/.ssh/id_rsa.heroku
   - git remote -v | grep ^heroku || heroku git:remote --app $APP_NAME
-  - git push -f heroku master
+  - git push -f heroku $BRANCH:master
